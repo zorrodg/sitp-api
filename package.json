@@ -4,13 +4,18 @@
   "description": "Rutas del SITP disponibles en una API RESTful",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+  },
+  "engines": {
+    "node": "0.10.x"
   },
   "repository": {
     "type": "git",
     "url": "git@heroku.com:sheltered-oasis-7120.git"
   },
   "author": "Andrés Zorro <zorrodg@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "~4.10.2"
+  }
 }
