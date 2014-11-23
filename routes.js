@@ -7,8 +7,24 @@
  */
 
 function Routes (app) {
-  app.get('/', function(req,res) {
-    res.send('Hello World');
+  /**
+   * Home
+   */
+  app.get('/', function (req,res) {
+    return res.send('Hello stranger, please enter your name in the path');
+  });
+
+  /**
+   * Salute
+   */
+  app.get('/:name', function (req,res) {
+    var name = req.params.name;
+
+    if(name){
+      return res.send('Hello ' + name + ', I salute you');
+    }
+
+    return res.redirect('/');
   });
 
   return app;
