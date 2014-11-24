@@ -16,6 +16,7 @@
   "author": "Andrés Zorro <zorrodg@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "~4.10.2"
+    "express": "~4.10.2",
+    "pg": "~4.0.0"
   }
 }
