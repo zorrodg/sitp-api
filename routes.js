@@ -18,8 +18,10 @@ function Routes (app) {
 
   
   app.get('/db', function (request, response) {
+    process.env.DATABASE_URL = 'postgres://iihbagdlipnocu:EIgZe7oUnn3Mqk4F7RJpeixoS4@ec2-54-83-204-244.compute-1.amazonaws.com:5432/d5i57kjvaj1ttc?ssl=true';
     pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      client.query('SELECT * FROM test_table', function(err, result) {
+      if(err) throw err;
+      client.query('SELECT * FROM test_table2', function(err, result) {
         done();
         if (err)
          { console.error(err); response.send("Error " + err); }
