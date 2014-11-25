@@ -35,7 +35,7 @@ qOrm.qConnect(process.env.DATABASE_URL)
       }
     );
 
-    q.resolve(Person);
+    return q.resolve(Person);
     
   }, function(err){
     console.log('ORM Connection error', err); // LOG
