@@ -20,15 +20,12 @@ qOrm.qConnect(process.env.DATABASE_URL)
         name      : String,
         surname   : String,
         age       : Number, // FLOAT
-        male      : Boolean,
-        //continent : [ "Europe", "America", "Asia", "Africa", "Australia", "Antartica" ], // ENUM type
-        //photo     : Buffer, // BLOB/BINARY
-        //data      : Object // JSON encoded
+        male      : Boolean
       }, 
       {
         methods: {
           fullName: function () {
-            return this.continent;
+            return this.name + ' ' + this.surname;
           }
         }, 
         validations: {}

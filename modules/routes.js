@@ -5,9 +5,9 @@
  * @author Andrés Zorro <zorrodg@gmail.com>
  * @module routes
  */
+var person = require('./../models/person');
 
 function Routes (app) {
-  var person = require('./../models/person');
   /**
    * Home
    */
@@ -21,21 +21,35 @@ function Routes (app) {
   app.get('/:name', function (req, res) {
     var name = req.params.name;
     
-    if(name && person){
+    if(name && person && req.url !== '/favicon.ico'){
       // Query Database
       return person.then(function(model){
-        return model.qAll({ name: name })
-          .then(function(query) {
-            var result = query[0];
 
-            if(result){
-              return res.send('Hello ' + result.name + ' ' + result.surname + ', I salute you');
-            }
+        model.qCreate([
+          {
+            name: "John",
+            surname: "Doe",
+            age: 25,
+            male: true
+          }
+        ]);
 
-            return res.redirect('/');
+        return model.find({ name: name }, function(err, query){
+          var result = query[0];
 
-          }, handleError);
-        }, handleError);
+          if(result){
+            result.age = 27;
+            result.surname = 'Zorro Maldonado';
+
+            result.save();
+
+            return res.send('Hello ' + result.fullName() + ', I salute you');
+          }
+
+          return res.redirect('/');
+        });
+          
+      }, handleError);
     }
 
     return res.redirect('/');
