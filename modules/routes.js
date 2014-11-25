@@ -7,6 +7,7 @@
  */
 
 function Routes (app) {
+  var person = require('./../models/person');
   /**
    * Home
    */
@@ -17,31 +18,36 @@ function Routes (app) {
   /**
    * Salute
    */
-  app.get('/:name', function (req,res) {
-    var name = req.params.name,
-      person = require('./../models/person');
-
+  app.get('/:name', function (req, res) {
+    var name = req.params.name;
     
-    if(name){
+    if(name && person){
       // Query Database
-      person.then(function(model){
-        model.qAll({ name: name })
+      return person.then(function(model){
+        return model.qAll({ name: name })
           .then(function(query) {
             var result = query[0];
-            if(result.name){
-              return res.send('Hello ' + name + ' ' + surname + ', I salute you');
+
+            if(result){
+              return res.send('Hello ' + result.name + ' ' + result.surname + ', I salute you');
             }
+
+            return res.redirect('/');
+
           }, handleError);
-      }, handleError);
+        }, handleError);
     }
 
+    return res.redirect('/');
+
     function handleError(err){
-      console.log('error',error); // LOG
+      console.log('error', error); // LOG
       return res.redirect('/');
     }
   });
 
   return app;
+  
 }
 
 module.exports = Routes;
