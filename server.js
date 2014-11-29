@@ -8,7 +8,7 @@ app.set('port', process.env.PORT || 5000);
 process.env.DATABASE_URL = 'mongodb://rutas-sitp-user:sitpuser@ds053370.mongolab.com:53370/rutas-sitp';
 
 // Añadiendo rutas
-app = require('./modules/routes')(app);
+app = require('./routes')(app);
 
 // Init server
 app.listen(app.get('port'), function(){

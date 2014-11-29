@@ -17,10 +17,11 @@
   "license": "MIT",
   "dependencies": {
     "express": "~4.10.2",
-    "orm": "^2.1.20",
-    "q-orm": "0.0.1",
     "q": "^1.1.2",
-    "pg": "^4.0.0",
-    "mongoose": "~3.8.19"
+    "mongoose": "~3.8.19",
+    "request": "~2.47.0",
+    "cheerio": "~0.18.0",
+    "html-entities": "^1.1.1",
+    "diacritic": "0.0.2"
   }
 }
