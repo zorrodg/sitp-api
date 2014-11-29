@@ -7,37 +7,16 @@
  */
 
 // Module dependencies
-// var orm = require('orm'),
-//     Q = require('q'),
-//     qOrm = require('q-orm');
+var mongoose = require('mongoose');
 
-// var q = Q.defer();
+mongoose.connect(process.env.DATABASE_URL);
 
-// qOrm.qConnect(process.env.DATABASE_URL)
-//   .then(function(db){
-//     var Person = db.qDefine('person', 
-//       {
-//         name      : String,
-//         surname   : String,
-//         age       : Number, // FLOAT
-//         male      : Boolean
-//       }, 
-//       {
-//         methods: {
-//           fullName: function () {
-//             return this.name + ' ' + this.surname;
-//           }
-//         }, 
-//         validations: {}
-//       }
-//     );
+var Ruta = mongoose.model('Ruta', { 
+    name      : String,
+    surname   : String,
+    age       : Number, // FLOAT
+    male      : Boolean
+  });
 
-//     return q.resolve(Person);
-    
-//   }, function(err){
-//     console.log('ORM Connection error', err); // LOG
-//     return false;
-//   });
-
-// module.exports = q.promise;
+module.exports = Ruta;
 
