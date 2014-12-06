@@ -11,10 +11,11 @@ mongoose.connect(process.env.DATABASE_URL);
 
 // Ruta schema
 var rutaSchema = mongoose.Schema({ 
-  name      : String,
-  surname   : String,
-  age       : Number, // FLOAT
-  male      : Boolean
+  id            : String,
+  ruta          : String,
+  url           : String,
+  esquema       : [],
+  horario       : {}
 });
 
 module.exports = mongoose.model('Ruta', rutaSchema);
