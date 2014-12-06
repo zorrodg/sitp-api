@@ -11,7 +11,7 @@ mongoose.connect(process.env.DATABASE_URL);
 
 // Ruta schema
 var rutaSchema = mongoose.Schema({ 
-  id            : String,
+  id_ruta       : String,
   ruta          : String,
   url           : String,
   esquema       : [],
