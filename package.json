@@ -22,6 +22,7 @@
     "request": "~2.47.0",
     "cheerio": "~0.18.0",
     "html-entities": "^1.1.1",
-    "diacritic": "0.0.2"
+    "diacritic": "0.0.2",
+    "underscore": "~1.7.0"
   }
 }

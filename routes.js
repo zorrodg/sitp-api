@@ -4,7 +4,8 @@
  * @author Andrés Zorro <zorrodg@gmail.com>
  * @module routes
  */
-var //Ruta = require('./models/ruta'),
+var Ruta = require('./models/ruta'),
+    _ = require('underscore'),
     Scraper = require('./lib/scraper/module');
 
 function Routes (app) {
@@ -12,37 +13,33 @@ function Routes (app) {
    * Home
    */
   app.get('/', function (req,res) { 
-    return res.send('Hello stranger, please enter your name in the path');
+    return res.send('Bienvenido al servicio de rutas del SITP.');
   });
 
   /**
-   * Salute
+   * Encuentra rutas por el ID
    */
-  // app.get('/:name', function (req, res) {
-  //   var name = req.params.name;
+  app.get('/ruta/:id_ruta', function(req, res){
+    Ruta.findById(req.params.id_ruta, function(data) {
+      res.send(JSON.stringify(data));
+    });
+  });
+
+  /**
+   * Encuentra rutas por el barrio de salida y de llegada
+   */
+  app.get('/buscar/:barrio_salida/:barrio_llegada?', function(req, res){
+    var criterios = [];
+    for(var obj in req.params){
+      if(req.params[obj]){
+        criterios.push(req.params[obj]);
+      } 
+    }
     
-  //   if(name && req.url !== '/favicon.ico'){
-
-  //     ruta = new Ruta({
-  //       name: name,
-  //       surname: 'Zorro',
-  //       age: 27,
-  //       male: true
-  //     });
-      
-  //     return ruta.save(function(err){
-  //       if(err) console.log(err);
-  //       res.send('Hello ' + ruta.name + ' ' + ruta.surname +', I salute you');
-  //     });  
-  //   }
-
-  //   return res.redirect('/');
-
-  //   function handleError(err){
-  //     console.log('error', error); // LOG
-  //     return res.redirect('/');
-  //   }
-  // });
+    Ruta.search(criterios, function(data){
+      res.send(JSON.stringify(data));
+    });
+  });
   
   /**
    * Scraper
@@ -61,7 +58,6 @@ function Routes (app) {
   });
 
   return app;
-  
 }
 
 module.exports = Routes;
