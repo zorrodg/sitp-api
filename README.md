@@ -13,19 +13,19 @@ La aplicación se encuentra hosteada en Heroku:
 Busca rutas por barrios. El parámetro de llegada es opcional
 
 #### Ejemplo
-
+```
   https://sitp-api.herokuapp.com/buscar/teusaquillo/chapinero
+```
 
-***
 
 ### /ruta/id_ruta
 
 Busca por No. de Ruta, basado en el listado de rutas del SITP.
 
 #### Ejemplo
-
+```
   https://sitp-api.herokuapp.com/ruta/544B
-
+```
 ***
 
 ## Licencia
