@@ -18,7 +18,7 @@ Busca rutas por barrios. El parámetro de llegada es opcional
 ```
 
 
-### /ruta/id_ruta
+### /ruta/:id_ruta
 
 Busca por No. de Ruta, basado en el listado de rutas del SITP.
 
