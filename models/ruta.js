@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
     _        = require('underscore'),
     diacritic = require('diacritic').clean;
 
-mongoose.connect(process.env.DATABASE_URL);
+var db = mongoose.createConnection(process.env.DATABASE_URL);
 
 // Ruta schema
 var rutaSchema = mongoose.Schema({ 
@@ -19,7 +19,8 @@ var rutaSchema = mongoose.Schema({
   url           : String,
   esquema       : [],
   buscable      : [],
-  horario       : {}
+  horario       : {},
+  paraderos     : {}
 });
 
 /**
@@ -58,7 +59,7 @@ rutaSchema.statics.search = function(criteria, callback){
 };
 
 function truncate(result){
-  return _.pick(result, 'id_ruta', 'ruta', 'horario', 'url', 'esquema');
+  return _.pick(result, 'id_ruta', 'ruta', 'horario', 'url', 'esquema', 'paraderos');
 }
 
-module.exports = mongoose.model('Ruta', rutaSchema);
+module.exports = db.model('Ruta', rutaSchema);

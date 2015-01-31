@@ -21,7 +21,8 @@ function Routes (app) {
    */
   app.get('/ruta/:id_ruta', function(req, res){
     Ruta.findById(req.params.id_ruta, function(data) {
-      res.send(JSON.stringify(data));
+      res.set('Content-Type', 'application/json')
+        .send(JSON.stringify(data));
     });
   });
 
@@ -37,7 +38,8 @@ function Routes (app) {
     }
     
     Ruta.search(criterios, function(data){
-      res.send(JSON.stringify(data));
+      res.set('Content-Type', 'application/json')
+        .send(JSON.stringify(data));
     });
   });
   
@@ -51,9 +53,16 @@ function Routes (app) {
         var rutas = require('./output/rutas.json');
         Scraper.writeLines(rutas,function(data){
           endTime = new Date().getTime();
+          console.log('Finalizado en ' + (endTime - startTime)/1000 + 's.');
           return res.send('Finalizado en ' + (endTime - startTime)/1000 + 's.');
         });
       }
+    });
+  });
+
+  app.get('/test', function(req, res){
+    Scraper.writeStops([], function(ret){
+      res.send(ret);
     });
   });
 
