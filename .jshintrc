@@ -1,0 +1,8 @@
+{
+  "node":true,
+  "strict": true,
+  "quotmark": true,
+  "indent": 2,
+  "maxcomplexity": 5,
+  "maxdepth": 3
+}

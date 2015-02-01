@@ -4,8 +4,10 @@
  * @author Andrés Zorro <zorrodg@gmail.com>
  * @module routes
  */
-var Ruta = require('./models/ruta'),
-    _ = require('underscore'),
+'use strict';
+
+var Ruta    = require('./models/ruta'),
+    _       = require('underscore'),
     Scraper = require('./lib/scraper/module');
 
 function Routes (app) {
@@ -51,18 +53,41 @@ function Routes (app) {
     Scraper.getList(function(data){
       if(data){
         var rutas = require('./output/rutas.json');
-        Scraper.writeLines(rutas,function(data){
-          endTime = new Date().getTime();
-          console.log('Finalizado en ' + (endTime - startTime)/1000 + 's.');
-          return res.send('Finalizado en ' + (endTime - startTime)/1000 + 's.');
+        Scraper.writeLines(rutas, function(data){
+          if(data){
+            var paraderos = require('./output/paraderos.json');
+            Scraper.writeStops(paraderos, function(data){
+              endTime = new Date().getTime();
+              console.log('Finalizado en ' + (endTime - startTime)/1000 + 's.');
+              return res.send('Finalizado en ' + (endTime - startTime)/1000 + 's.');
+            });
+          }
         });
       }
     });
   });
 
-  app.get('/test', function(req, res){
-    Scraper.writeStops([], function(ret){
-      res.send(ret);
+  app.get('/scraper/lines', function (req,res){
+    var startTime = new Date().getTime(), endTime;
+    Scraper.getList(function(data){
+      if(data){
+        var rutas = require('./output/rutas.json');
+        Scraper.writeLines(rutas, function(data){
+          endTime = new Date().getTime();
+          console.log('Finalizado en ' + (endTime - startTime)/1000 + 's.');
+          return res.send('Lineas escritas --> Finalizado en ' + (endTime - startTime)/1000 + 's.');
+        });
+      }
+    });
+  });
+
+  app.get('/scraper/stops', function (req,res){
+    var startTime = new Date().getTime(), endTime;
+    var paraderos = require('./output/paraderos.json');
+    Scraper.writeStops(paraderos, function(data){
+      endTime = new Date().getTime();
+      console.log('Finalizado en ' + (endTime - startTime)/1000 + 's.');
+      return res.send('Paraderos escritos --> Finalizado en ' + (endTime - startTime)/1000 + 's.');
     });
   });
 
