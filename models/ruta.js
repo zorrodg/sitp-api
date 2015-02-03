@@ -16,13 +16,16 @@ var db = mongoose.createConnection(process.env.DATABASE_URL);
 
 // Ruta schema
 var rutaSchema = mongoose.Schema({ 
-  id_ruta       : String,
+  id_ruta       : { type: String, unique: true, required: true },
   ruta          : String,
   url           : String,
   esquema       : [],
   buscable      : [],
   horario       : {},
-  paraderos     : {}
+  paraderos     : {
+    ida: [{ type: mongoose.Schema.ObjectId, ref: 'Paradero' }],
+    vuelta: [{ type: mongoose.Schema.ObjectId, ref: 'Paradero' }]
+  }
 });
 
 /**

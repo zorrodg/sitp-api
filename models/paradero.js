@@ -16,7 +16,7 @@ var db = mongoose.createConnection(process.env.DATABASE_URL);
 
 // Paradero schema
 var paraderoSchema = mongoose.Schema({ 
-  id_paradero       : String,
+  id_paradero   : { type: String, unique: true, required: true },
   desc          : String,
   buscable      : String,
   url           : String,

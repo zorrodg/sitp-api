@@ -22,7 +22,9 @@ function Routes (app) {
    * Encuentra rutas por el ID
    */
   app.get('/ruta/:id_ruta', function(req, res){
-    Ruta.findById(req.params.id_ruta, function(data) {
+    Ruta.findOne({'id_ruta':req.params.id_ruta})
+      .populate('ida')
+      .exec(function(data) {
       res.set('Content-Type', 'application/json')
         .send(JSON.stringify(data));
     });
